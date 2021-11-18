@@ -1,0 +1,580 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>Form_All</class>
+ <widget class="QWidget" name="Form_All">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>790</width>
+    <height>410</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Flash ESP</string>
+  </property>
+  <widget class="QTabWidget" name="tabWidget">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>781</width>
+     <height>401</height>
+    </rect>
+   </property>
+   <property name="currentIndex">
+    <number>1</number>
+   </property>
+   <property name="tabBarAutoHide">
+    <bool>false</bool>
+   </property>
+   <widget class="QWidget" name="tab">
+    <attribute name="title">
+     <string>Configuration</string>
+    </attribute>
+    <widget class="QPushButton" name="pushButton_refreshAll">
+     <property name="geometry">
+      <rect>
+       <x>320</x>
+       <y>330</y>
+       <width>121</width>
+       <height>25</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Tout rafraichir</string>
+     </property>
+    </widget>
+    <widget class="QGroupBox" name="groupBox">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>0</y>
+       <width>421</width>
+       <height>151</height>
+      </rect>
+     </property>
+     <property name="title">
+      <string>Firmware</string>
+     </property>
+     <widget class="QListWidget" name="listWidget_firmware">
+      <property name="geometry">
+       <rect>
+        <x>30</x>
+        <y>30</y>
+        <width>231</width>
+        <height>111</height>
+       </rect>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="pushButton_firmware_refresh">
+      <property name="geometry">
+       <rect>
+        <x>300</x>
+        <y>100</y>
+        <width>89</width>
+        <height>25</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Rafraichir</string>
+      </property>
+     </widget>
+    </widget>
+    <widget class="QPushButton" name="pushButton_next">
+     <property name="geometry">
+      <rect>
+       <x>670</x>
+       <y>330</y>
+       <width>89</width>
+       <height>25</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Suivant</string>
+     </property>
+    </widget>
+    <widget class="QGroupBox" name="groupBox_2">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>130</y>
+       <width>751</width>
+       <height>191</height>
+      </rect>
+     </property>
+     <property name="title">
+      <string/>
+     </property>
+     <widget class="QGroupBox" name="groupBox_carte_1">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>20</y>
+        <width>161</width>
+        <height>161</height>
+       </rect>
+      </property>
+      <property name="title">
+       <string>Carte 1</string>
+      </property>
+      <widget class="QListWidget" name="listWidget_com_1">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>40</y>
+         <width>131</width>
+         <height>101</height>
+        </rect>
+       </property>
+      </widget>
+     </widget>
+     <widget class="QGroupBox" name="groupBox_carte_4">
+      <property name="geometry">
+       <rect>
+        <x>580</x>
+        <y>20</y>
+        <width>161</width>
+        <height>161</height>
+       </rect>
+      </property>
+      <property name="title">
+       <string>Carte 4</string>
+      </property>
+      <widget class="QListWidget" name="listWidget_com_4">
+       <property name="geometry">
+        <rect>
+         <x>20</x>
+         <y>30</y>
+         <width>121</width>
+         <height>111</height>
+        </rect>
+       </property>
+      </widget>
+     </widget>
+     <widget class="QGroupBox" name="groupBox_carte_3">
+      <property name="geometry">
+       <rect>
+        <x>390</x>
+        <y>20</y>
+        <width>161</width>
+        <height>161</height>
+       </rect>
+      </property>
+      <property name="title">
+       <string>Carte 3</string>
+      </property>
+      <widget class="QListWidget" name="listWidget_com_3">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>40</y>
+         <width>131</width>
+         <height>101</height>
+        </rect>
+       </property>
+      </widget>
+     </widget>
+     <widget class="QGroupBox" name="groupBox_carte_2">
+      <property name="geometry">
+       <rect>
+        <x>200</x>
+        <y>20</y>
+        <width>161</width>
+        <height>161</height>
+       </rect>
+      </property>
+      <property name="title">
+       <string>Carte 2</string>
+      </property>
+      <widget class="QListWidget" name="listWidget_com_2">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>40</y>
+         <width>131</width>
+         <height>101</height>
+        </rect>
+       </property>
+      </widget>
+     </widget>
+    </widget>
+    <widget class="QLabel" name="label_error">
+     <property name="geometry">
+      <rect>
+       <x>450</x>
+       <y>90</y>
+       <width>301</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">font : rgb(239, 41, 41)</string>
+     </property>
+     <property name="text">
+      <string>TextLabel</string>
+     </property>
+    </widget>
+   </widget>
+   <widget class="QWidget" name="tab_2">
+    <attribute name="title">
+     <string>Flash</string>
+    </attribute>
+    <widget class="QPushButton" name="pushButton_flashAll">
+     <property name="geometry">
+      <rect>
+       <x>670</x>
+       <y>310</y>
+       <width>101</width>
+       <height>41</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background : rgb(78, 154, 6)</string>
+     </property>
+     <property name="text">
+      <string>Flash All</string>
+     </property>
+    </widget>
+    <widget class="QFrame" name="frame_1">
+     <property name="geometry">
+      <rect>
+       <x>20</x>
+       <y>0</y>
+       <width>611</width>
+       <height>91</height>
+      </rect>
+     </property>
+     <property name="frameShape">
+      <enum>QFrame::StyledPanel</enum>
+     </property>
+     <property name="frameShadow">
+      <enum>QFrame::Raised</enum>
+     </property>
+     <widget class="QListWidget" name="listWidget_flash_carte_1">
+      <property name="geometry">
+       <rect>
+        <x>170</x>
+        <y>1</y>
+        <width>441</width>
+        <height>91</height>
+       </rect>
+      </property>
+     </widget>
+     <widget class="QWidget" name="widget" native="true">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>0</y>
+        <width>161</width>
+        <height>91</height>
+       </rect>
+      </property>
+      <widget class="QPushButton" name="pushButton_Flash_1">
+       <property name="geometry">
+        <rect>
+         <x>30</x>
+         <y>40</y>
+         <width>89</width>
+         <height>41</height>
+        </rect>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">background : rgb(138, 226, 52)</string>
+       </property>
+       <property name="text">
+        <string>Flash</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="label_flash_1">
+       <property name="geometry">
+        <rect>
+         <x>40</x>
+         <y>0</y>
+         <width>71</width>
+         <height>31</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Carte 1</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
+       </property>
+      </widget>
+      <widget class="QLabel" name="label_finish_1">
+       <property name="geometry">
+        <rect>
+         <x>40</x>
+         <y>20</y>
+         <width>67</width>
+         <height>17</height>
+        </rect>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">color : rgb(78, 154, 6)</string>
+       </property>
+       <property name="text">
+        <string>Terminer</string>
+       </property>
+      </widget>
+     </widget>
+    </widget>
+    <widget class="QFrame" name="frame_2">
+     <property name="geometry">
+      <rect>
+       <x>20</x>
+       <y>90</y>
+       <width>611</width>
+       <height>91</height>
+      </rect>
+     </property>
+     <property name="frameShape">
+      <enum>QFrame::StyledPanel</enum>
+     </property>
+     <property name="frameShadow">
+      <enum>QFrame::Raised</enum>
+     </property>
+     <widget class="QListWidget" name="listWidget_flash_carte_22">
+      <property name="geometry">
+       <rect>
+        <x>170</x>
+        <y>0</y>
+        <width>441</width>
+        <height>91</height>
+       </rect>
+      </property>
+     </widget>
+     <widget class="QWidget" name="widget_3" native="true">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>0</y>
+        <width>161</width>
+        <height>91</height>
+       </rect>
+      </property>
+      <widget class="QPushButton" name="pushButton_Flash_22">
+       <property name="geometry">
+        <rect>
+         <x>30</x>
+         <y>40</y>
+         <width>89</width>
+         <height>41</height>
+        </rect>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">background : rgb(138, 226, 52)</string>
+       </property>
+       <property name="text">
+        <string>Flash</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="label_flash_2">
+       <property name="geometry">
+        <rect>
+         <x>40</x>
+         <y>0</y>
+         <width>71</width>
+         <height>31</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Carte 2</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
+       </property>
+      </widget>
+      <widget class="QLabel" name="label_finish_22">
+       <property name="geometry">
+        <rect>
+         <x>40</x>
+         <y>20</y>
+         <width>67</width>
+         <height>17</height>
+        </rect>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">color : rgb(78, 154, 6)</string>
+       </property>
+       <property name="text">
+        <string>Terminer</string>
+       </property>
+      </widget>
+     </widget>
+    </widget>
+    <widget class="QFrame" name="frame_3">
+     <property name="geometry">
+      <rect>
+       <x>20</x>
+       <y>180</y>
+       <width>611</width>
+       <height>91</height>
+      </rect>
+     </property>
+     <property name="frameShape">
+      <enum>QFrame::StyledPanel</enum>
+     </property>
+     <property name="frameShadow">
+      <enum>QFrame::Raised</enum>
+     </property>
+     <widget class="QListWidget" name="listWidget_flash_carte_33">
+      <property name="geometry">
+       <rect>
+        <x>170</x>
+        <y>0</y>
+        <width>441</width>
+        <height>91</height>
+       </rect>
+      </property>
+     </widget>
+     <widget class="QWidget" name="widget_4" native="true">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>0</y>
+        <width>161</width>
+        <height>91</height>
+       </rect>
+      </property>
+      <widget class="QPushButton" name="pushButton_Flash_33">
+       <property name="geometry">
+        <rect>
+         <x>30</x>
+         <y>40</y>
+         <width>89</width>
+         <height>41</height>
+        </rect>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">background : rgb(138, 226, 52)</string>
+       </property>
+       <property name="text">
+        <string>Flash</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="label_flash_3">
+       <property name="geometry">
+        <rect>
+         <x>40</x>
+         <y>0</y>
+         <width>71</width>
+         <height>31</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Carte 3</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
+       </property>
+      </widget>
+      <widget class="QLabel" name="label_finish_33">
+       <property name="geometry">
+        <rect>
+         <x>40</x>
+         <y>20</y>
+         <width>67</width>
+         <height>17</height>
+        </rect>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">color : rgb(78, 154, 6)</string>
+       </property>
+       <property name="text">
+        <string>Terminer</string>
+       </property>
+      </widget>
+     </widget>
+    </widget>
+    <widget class="QFrame" name="frame_4">
+     <property name="geometry">
+      <rect>
+       <x>20</x>
+       <y>270</y>
+       <width>611</width>
+       <height>91</height>
+      </rect>
+     </property>
+     <property name="frameShape">
+      <enum>QFrame::StyledPanel</enum>
+     </property>
+     <property name="frameShadow">
+      <enum>QFrame::Raised</enum>
+     </property>
+     <widget class="QListWidget" name="listWidget_flash_carte_44">
+      <property name="geometry">
+       <rect>
+        <x>170</x>
+        <y>1</y>
+        <width>441</width>
+        <height>90</height>
+       </rect>
+      </property>
+     </widget>
+     <widget class="QWidget" name="widget_5" native="true">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>0</y>
+        <width>161</width>
+        <height>91</height>
+       </rect>
+      </property>
+      <widget class="QPushButton" name="pushButton_Flash_44">
+       <property name="geometry">
+        <rect>
+         <x>30</x>
+         <y>40</y>
+         <width>89</width>
+         <height>41</height>
+        </rect>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">background : rgb(138, 226, 52)</string>
+       </property>
+       <property name="text">
+        <string>Flash</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="label_flash_4">
+       <property name="geometry">
+        <rect>
+         <x>40</x>
+         <y>0</y>
+         <width>71</width>
+         <height>31</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Carte 4</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
+       </property>
+      </widget>
+      <widget class="QLabel" name="label_finish_44">
+       <property name="geometry">
+        <rect>
+         <x>40</x>
+         <y>20</y>
+         <width>67</width>
+         <height>17</height>
+        </rect>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">color : rgb(78, 154, 6)</string>
+       </property>
+       <property name="text">
+        <string>Terminer</string>
+       </property>
+      </widget>
+     </widget>
+    </widget>
+   </widget>
+  </widget>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
