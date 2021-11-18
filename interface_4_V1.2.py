@@ -27,19 +27,19 @@ def loadFile():
     ui.listWidget_firmware.clear()
     fileNames = glob.glob('*.bin')
     for fileName in fileNames:
-        #verification de non utilisation de caractères spéciaux pour le bon lancement de la commande 
+        #verification de non utilisation de caractères spéciaux pour le bon lancement de la commande
         if set('[~!@#$%^&*()_+{}":;\']+$').intersection(fileName):
             nbError += 1
             if nbError == 1:
-                ui.label_error.setText('Il y a ' + str(nbError) + ' fichier avec des caractères spéciaux') 
+                ui.label_error.setText('Il y a ' + str(nbError) + ' fichier avec des caractères spéciaux')
             else:
-                ui.label_error.setText('Il y a ' + str(nbError) + ' fichiers avec des caractères spéciaux') 
+                ui.label_error.setText('Il y a ' + str(nbError) + ' fichiers avec des caractères spéciaux')
         else:
             ui.listWidget_firmware.addItem(fileName)
 
 
 def loadPort(listWidgetsCom):
-    
+
     ui.tabWidget.setTabEnabled(1,False)
 
     #recherche des ports com utilisés
@@ -47,7 +47,7 @@ def loadPort(listWidgetsCom):
     connected = []
     for element in comlist:
         connected.append(element.device)
-    
+
     #chargement des ports com dans les listing
     for listWidgetCom in listWidgetsCom:
         listWidgetCom.clear()
@@ -61,34 +61,35 @@ def loadViewFlash(listWidgetsCom):
         ui.label_error.setText('Veuillez selectionner un fichier')
         return
     ui.label_error.setText('')
-    
+
     #verif si il y a un port com de selectionner
     listComSelected=[]
     flagComSelected = False
     nbComTrue=0
     numberComTrue=[]
+
     for index,listWidgetCom in enumerate(listWidgetsCom):
-        itemSelected = listWidgetCom.currentItem();
+        itemSelected = listWidgetCom.currentItem()
         if (itemSelected == None):
             listComSelected.append(False)
         else:
             listComSelected.append(True)
-            itemSelected = listWidgetsCom[index].currentItem().text();
+            itemSelected = listWidgetsCom[index].currentItem().text()
             listLabelsFinish[index].setText(itemSelected)
             nbComTrue +=1
             flagComSelected =True
-    
+
     if (flagComSelected == False):
         ui.label_error.setText('Veuillez selectionner au moins un port com')
         return
 
-    
+
     ui.tabWidget.setTabEnabled(1,True)
     ui.tabWidget.setCurrentIndex(1)
     print(listComSelected)
     print(nbComTrue)
 
-    #afficher le terminal qui correspond 
+    #afficher le terminal qui correspond
 
     #calcul de la hauteur frame et de terminal
     heightWindows = 340
@@ -101,7 +102,7 @@ def loadViewFlash(listWidgetsCom):
             listingFrameFlash.setGeometry(QtCore.QRect(20, int(((heightFrame)*indexTrue)+20), 611, int(heightFrame)))
             listWidgetFlashCarte[index].setGeometry(QtCore.QRect(170, 0, 441, int(heightFrame)))
             indexTrue+=1
- 
+
 
 def runTasks(self):
     threadCount = QThreadPool.globalInstance().maxThreadCount()
@@ -125,16 +126,16 @@ class Runnable(QRunnable):
 
     def run(self):
         """Long-running task."""
-        flashComponent(self.threadID, self.threadName, self.commande, self.flashNumbersDoing)        
+        flashComponent(self.threadID, self.threadName, self.commande, self.flashNumbersDoing)
 
-    
+
 
 
 def loadFlash(flashNumber):
     listPushButton_Flash = [ui.pushButton_Flash_1,ui.pushButton_Flash_22,ui.pushButton_Flash_33,ui.pushButton_Flash_44]
     resetLabelFinish()
-    
-    
+
+
     flashNumbersDoing=[]
     if(flashNumber== 100):
         for index,listWidgetCom in enumerate(listWidgetsCom):
@@ -156,23 +157,24 @@ def loadFlash(flashNumber):
         #print('esptool.py --port '+ str(itemSelected) +' erase_flash')
         #commande = 'esptool.py --port '+ str(itemSelected) +' erase_flash && esptool.py --chip esp32 --port '+ str(itemSelected) +' write_flash -z 0x1000 esp32-20210902-v1.17.bin'
         commande = 'esptool.py --port '+ str(itemSelected) +' erase_flash'
-        commande2 = 'esptool.py --chip esp32 --port '+ str(itemSelected) + ' write_flash -z 0x1000 ' + str(fileSelected) 
+        commande2 = 'esptool.py --chip esp32 --port '+ str(itemSelected) + ' write_flash -z 0x1000 ' + str(fileSelected)
 
         print(commande +' && ' + commande2)
         commande = commande +' && ' + commande2
-       
+
         #threadCount = QThreadPool.globalInstance().maxThreadCount()
         pool = QThreadPool.globalInstance()
         # 2. Instantiate the subclass of QRunnable
         runnable = Runnable(flashNumberDoing, "Commande-"+str(flashNumberDoing), commande, flashNumbersDoing)
         # 3. Call start()
         pool.start(runnable)
- 
+
 
 
 
 def flashComponent(threadID, threadName, commande, flashNumbersDoing):
     global finishFlashNumber
+
     #onglet cofiguration e disable
     ui.tabWidget.setTabEnabled(0,False)
 
@@ -191,13 +193,19 @@ def flashComponent(threadID, threadName, commande, flashNumbersDoing):
     listPushButton_Flash[threadID].setEnabled(True)
 
     finishFlashNumber += 1
-    if(len(flashNumbersDoing)== finishFlashNumber):
+
+    print("len(flashNumbersDoing)")
+    print(len(flashNumbersDoing))
+    print("finishFlashNumber")
+    print(finishFlashNumber)
+
+    if(len(flashNumbersDoing) == finishFlashNumber):
         ui.tabWidget.setTabEnabled(0,True)
         for flashNumberDoing in flashNumbersDoing:
             ui.pushButton_flashAll.setEnabled(True)
             #listPushButton_Flash[flashNumberDoing].setEnabled(True)
+            finishFlashNumber = 0
 
-        
 
 if __name__ == "__main__":
     import sys
@@ -210,8 +218,8 @@ if __name__ == "__main__":
     listWidgetFlashCarte = [ui.listWidget_flash_carte_1,ui.listWidget_flash_carte_22,ui.listWidget_flash_carte_33,ui.listWidget_flash_carte_44]
     listWidgetsCom = [ui.listWidget_com_1,ui.listWidget_com_2,ui.listWidget_com_3,ui.listWidget_com_4]
     listPushButton_Flash = [ui.pushButton_Flash_1,ui.pushButton_Flash_22,ui.pushButton_Flash_33,ui.pushButton_Flash_44]
-    listLabelsFinish =[ui.label_finish_1, ui.label_finish_22, ui.label_finish_33, ui.label_finish_44] 
-    
+    listLabelsFinish =[ui.label_finish_1, ui.label_finish_22, ui.label_finish_33, ui.label_finish_44]
+
     #initialistion des message erreurs dnas config
     ui.label_error.setText('')
     resetLabelFinish()
@@ -231,7 +239,7 @@ if __name__ == "__main__":
     ui.pushButton_Flash_44.clicked.connect(lambda :loadFlash(3))
 
     ui.pushButton_flashAll.clicked.connect(lambda :loadFlash(100))
-    
+
 
 
     sys.exit(app.exec_())

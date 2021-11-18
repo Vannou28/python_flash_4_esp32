@@ -23,7 +23,7 @@
     </rect>
    </property>
    <property name="currentIndex">
-    <number>1</number>
+    <number>0</number>
    </property>
    <property name="tabBarAutoHide">
     <bool>false</bool>
@@ -89,6 +89,9 @@
        <width>89</width>
        <height>25</height>
       </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background : rgb(78, 154, 6)</string>
      </property>
      <property name="text">
       <string>Suivant</string>
@@ -204,15 +207,18 @@
       <rect>
        <x>450</x>
        <y>90</y>
-       <width>301</width>
+       <width>321</width>
        <height>20</height>
       </rect>
      </property>
      <property name="styleSheet">
-      <string notr="true">font : rgb(239, 41, 41)</string>
+      <string notr="true">color : rgb(239, 41, 41)</string>
      </property>
      <property name="text">
       <string>TextLabel</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignCenter</set>
      </property>
     </widget>
    </widget>
@@ -289,11 +295,16 @@
       <widget class="QLabel" name="label_flash_1">
        <property name="geometry">
         <rect>
-         <x>40</x>
+         <x>-10</x>
          <y>0</y>
          <width>71</width>
          <height>31</height>
         </rect>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>10</pointsize>
+        </font>
        </property>
        <property name="text">
         <string>Carte 1</string>
@@ -305,17 +316,25 @@
       <widget class="QLabel" name="label_finish_1">
        <property name="geometry">
         <rect>
-         <x>40</x>
+         <x>0</x>
          <y>20</y>
-         <width>67</width>
-         <height>17</height>
+         <width>151</width>
+         <height>20</height>
         </rect>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>10</pointsize>
+        </font>
        </property>
        <property name="styleSheet">
         <string notr="true">color : rgb(78, 154, 6)</string>
        </property>
        <property name="text">
         <string>Terminer</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
        </property>
       </widget>
      </widget>
@@ -373,11 +392,16 @@
       <widget class="QLabel" name="label_flash_2">
        <property name="geometry">
         <rect>
-         <x>40</x>
+         <x>-10</x>
          <y>0</y>
          <width>71</width>
          <height>31</height>
         </rect>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>10</pointsize>
+        </font>
        </property>
        <property name="text">
         <string>Carte 2</string>
@@ -389,17 +413,25 @@
       <widget class="QLabel" name="label_finish_22">
        <property name="geometry">
         <rect>
-         <x>40</x>
+         <x>0</x>
          <y>20</y>
-         <width>67</width>
-         <height>17</height>
+         <width>151</width>
+         <height>20</height>
         </rect>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>10</pointsize>
+        </font>
        </property>
        <property name="styleSheet">
         <string notr="true">color : rgb(78, 154, 6)</string>
        </property>
        <property name="text">
         <string>Terminer</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
        </property>
       </widget>
      </widget>
@@ -457,11 +489,16 @@
       <widget class="QLabel" name="label_flash_3">
        <property name="geometry">
         <rect>
-         <x>40</x>
+         <x>-10</x>
          <y>0</y>
          <width>71</width>
          <height>31</height>
         </rect>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>10</pointsize>
+        </font>
        </property>
        <property name="text">
         <string>Carte 3</string>
@@ -473,17 +510,25 @@
       <widget class="QLabel" name="label_finish_33">
        <property name="geometry">
         <rect>
-         <x>40</x>
+         <x>0</x>
          <y>20</y>
-         <width>67</width>
-         <height>17</height>
+         <width>151</width>
+         <height>20</height>
         </rect>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>10</pointsize>
+        </font>
        </property>
        <property name="styleSheet">
         <string notr="true">color : rgb(78, 154, 6)</string>
        </property>
        <property name="text">
         <string>Terminer</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
        </property>
       </widget>
      </widget>
@@ -541,11 +586,16 @@
       <widget class="QLabel" name="label_flash_4">
        <property name="geometry">
         <rect>
-         <x>40</x>
+         <x>-10</x>
          <y>0</y>
          <width>71</width>
          <height>31</height>
         </rect>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>10</pointsize>
+        </font>
        </property>
        <property name="text">
         <string>Carte 4</string>
@@ -557,17 +607,25 @@
       <widget class="QLabel" name="label_finish_44">
        <property name="geometry">
         <rect>
-         <x>40</x>
+         <x>0</x>
          <y>20</y>
-         <width>67</width>
-         <height>17</height>
+         <width>151</width>
+         <height>20</height>
         </rect>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>10</pointsize>
+        </font>
        </property>
        <property name="styleSheet">
         <string notr="true">color : rgb(78, 154, 6)</string>
        </property>
        <property name="text">
         <string>Terminer</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
        </property>
       </widget>
      </widget>
