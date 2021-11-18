@@ -10,10 +10,7 @@ import serial.tools.list_ports
 import subprocess
 import sys
 import glob
-import threading
 
-
-from PyQt5.QtCore import QObject, QThread, pyqtSignal
 from PyQt5 import QtCore, QtGui, QtWidgets
 from interface_all import Ui_Form_All
 from PyQt5.QtCore import QRunnable, Qt, QThreadPool
@@ -30,6 +27,7 @@ def loadFile():
     ui.listWidget_firmware.clear()
     fileNames = glob.glob('*.bin')
     for fileName in fileNames:
+        #verification de non utilisation de caractères spéciaux pour le bon lancement de la commande 
         if set('[~!@#$%^&*()_+{}":;\']+$').intersection(fileName):
             nbError += 1
             if nbError == 1:
@@ -75,6 +73,8 @@ def loadViewFlash(listWidgetsCom):
             listComSelected.append(False)
         else:
             listComSelected.append(True)
+            itemSelected = listWidgetsCom[index].currentItem().text();
+            listLabelsFinish[index].setText(itemSelected)
             nbComTrue +=1
             flagComSelected =True
     
@@ -133,7 +133,7 @@ class Runnable(QRunnable):
 def loadFlash(flashNumber):
     listPushButton_Flash = [ui.pushButton_Flash_1,ui.pushButton_Flash_22,ui.pushButton_Flash_33,ui.pushButton_Flash_44]
     resetLabelFinish()
-
+    
     
     flashNumbersDoing=[]
     if(flashNumber== 100):
@@ -149,6 +149,7 @@ def loadFlash(flashNumber):
     for flashNumberDoing in flashNumbersDoing:
         ui.pushButton_flashAll.setEnabled(False)
         itemSelected = listWidgetsCom[flashNumberDoing].currentItem().text();
+        listLabelsFinish[flashNumberDoing].setText(itemSelected)
         fileSelected = ui.listWidget_firmware.currentItem().text();
         listPushButton_Flash[flashNumberDoing].setEnabled(False)
         listWidgetFlashCarte[flashNumberDoing].clear()
@@ -183,22 +184,18 @@ def flashComponent(threadID, threadName, commande, flashNumbersDoing):
         listWidgetFlashCarte[threadID].addItem(str(line))
         listWidgetFlashCarte[threadID].scrollToBottom()
 
+    #gestion des affichages après le flashage terminé
     listWidgetFlashCarte[threadID].addItem(commande + ' : effectuée')
     listWidgetFlashCarte[threadID].scrollToBottom()
-    
-    ui.label_error.setText('Flash terminé') 
-    ui.tabWidget.widget(0)
-
-    finishFlashNumber += 1
     listLabelsFinish[threadID].setText("Terminé")
     listPushButton_Flash[threadID].setEnabled(True)
 
+    finishFlashNumber += 1
     if(len(flashNumbersDoing)== finishFlashNumber):
         ui.tabWidget.setTabEnabled(0,True)
         for flashNumberDoing in flashNumbersDoing:
             ui.pushButton_flashAll.setEnabled(True)
             #listPushButton_Flash[flashNumberDoing].setEnabled(True)
-
 
         
 
@@ -208,21 +205,22 @@ if __name__ == "__main__":
     Form_All = QtWidgets.QWidget()
     ui = Ui_Form_All()
     ui.setupUi(Form_All)
-    # variable global pour le thread
+    # listing de ensemble a modifier
     listingFramesFlash= [ui.frame_1,ui.frame_2,ui.frame_3,ui.frame_4]
     listWidgetFlashCarte = [ui.listWidget_flash_carte_1,ui.listWidget_flash_carte_22,ui.listWidget_flash_carte_33,ui.listWidget_flash_carte_44]
     listWidgetsCom = [ui.listWidget_com_1,ui.listWidget_com_2,ui.listWidget_com_3,ui.listWidget_com_4]
     listPushButton_Flash = [ui.pushButton_Flash_1,ui.pushButton_Flash_22,ui.pushButton_Flash_33,ui.pushButton_Flash_44]
     listLabelsFinish =[ui.label_finish_1, ui.label_finish_22, ui.label_finish_33, ui.label_finish_44] 
-    # queue where results are placed
-
-
-
-    Form_All.show()
-
+    
+    #initialistion des message erreurs dnas config
+    ui.label_error.setText('')
     resetLabelFinish()
     loadFile()
     loadPort(listWidgetsCom)
+
+    Form_All.show()
+
+
     ui.pushButton_firmware_refresh.clicked.connect(loadFile)
     ui.pushButton_refreshAll.clicked.connect(lambda : loadPort(listWidgetsCom))
     ui.pushButton_next.clicked.connect(lambda : loadViewFlash(listWidgetsCom))
