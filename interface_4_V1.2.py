@@ -16,7 +16,7 @@ from interface_all import Ui_Form_All
 from PyQt5.QtCore import QRunnable, Qt, QThreadPool
 
 
-finishFlashNumber = 0
+
 
 def resetLabelFinish():
     for listLabelFinish in listLabelsFinish:
@@ -54,6 +54,7 @@ def loadPort(listWidgetsCom):
         listWidgetCom.addItems(connected)
 
 
+
 def loadViewFlash(listWidgetsCom):
     #verif si il y a fichier de selectionné
     fileSelected = ui.listWidget_firmware.currentItem();
@@ -67,7 +68,7 @@ def loadViewFlash(listWidgetsCom):
     flagComSelected = False
     nbComTrue=0
     numberComTrue=[]
-
+    portsComselect = []
     for index,listWidgetCom in enumerate(listWidgetsCom):
         itemSelected = listWidgetCom.currentItem()
         if (itemSelected == None):
@@ -75,6 +76,8 @@ def loadViewFlash(listWidgetsCom):
         else:
             listComSelected.append(True)
             itemSelected = listWidgetsCom[index].currentItem().text()
+            # on enregistre les noms des ports com pour les comparer apres
+            portsComselect.append(itemSelected)
             listLabelsFinish[index].setText(itemSelected)
             nbComTrue +=1
             flagComSelected =True
@@ -83,6 +86,14 @@ def loadViewFlash(listWidgetsCom):
         ui.label_error.setText('Veuillez selectionner au moins un port com')
         return
 
+    #verification si 2x le meme port
+    #set retire les doublon d'un tableau
+    if (len(portsComselect) != len(set(portsComselect))):
+        ui.label_error.setText('ATTENTION : Vous utilisez 2x le même port')
+        return
+
+
+    print("verification des ports Com similaire")
 
     ui.tabWidget.setTabEnabled(1,True)
     ui.tabWidget.setCurrentIndex(1)
@@ -148,11 +159,11 @@ def loadFlash(flashNumber):
     threads = []
 
     for flashNumberDoing in flashNumbersDoing:
-        ui.pushButton_flashAll.setEnabled(False)
+        
         itemSelected = listWidgetsCom[flashNumberDoing].currentItem().text();
         listLabelsFinish[flashNumberDoing].setText(itemSelected)
         fileSelected = ui.listWidget_firmware.currentItem().text();
-        listPushButton_Flash[flashNumberDoing].setEnabled(False)
+        
         listWidgetFlashCarte[flashNumberDoing].clear()
         #print('esptool.py --port '+ str(itemSelected) +' erase_flash')
         #commande = 'esptool.py --port '+ str(itemSelected) +' erase_flash && esptool.py --chip esp32 --port '+ str(itemSelected) +' write_flash -z 0x1000 esp32-20210902-v1.17.bin'
@@ -173,38 +184,42 @@ def loadFlash(flashNumber):
 
 
 def flashComponent(threadID, threadName, commande, flashNumbersDoing):
-    global finishFlashNumber
 
-    #onglet cofiguration e disable
+    #true met la carte en process et sera retirer a la fin
+    listFlashInProcess[threadID] = True
+
+    #onglet configuration e disable
     ui.tabWidget.setTabEnabled(0,False)
+    # on retire l'utilisation la liste de port com et le bouton flash 
+    listWidgetsCom[threadID].setEnabled(False)
+    ui.pushButton_flashAll.setEnabled(False)
+    listPushButton_Flash[threadID].setEnabled(False)
 
+    #envoie de la commande dans le terminal
     procExe = subprocess.Popen(commande, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE, universal_newlines=True)
 
+    #recuperation du buffer des reponse du terminal 
     while procExe.poll() is None:
         line = procExe.stdout.readline()
         print("Print:" + threadName + ' ' + line)
         listWidgetFlashCarte[threadID].addItem(str(line))
         listWidgetFlashCarte[threadID].scrollToBottom()
+        #ui.pushButton_flashAll.setEnabled(False)
 
     #gestion des affichages après le flashage terminé
     listWidgetFlashCarte[threadID].addItem(commande + ' : effectuée')
     listWidgetFlashCarte[threadID].scrollToBottom()
     listLabelsFinish[threadID].setText("Terminé")
+    
     listPushButton_Flash[threadID].setEnabled(True)
+    ui.tabWidget.setTabEnabled(0,True)
+    listFlashInProcess[threadID] = False
+    listWidgetsCom[threadID].setEnabled(True)
 
-    finishFlashNumber += 1
+    #on verifie en retirant les doublons si on a que des false soit 1 case
+    if (len(set(listFlashInProcess)) == 1):
+        ui.pushButton_flashAll.setEnabled(True)
 
-    print("len(flashNumbersDoing)")
-    print(len(flashNumbersDoing))
-    print("finishFlashNumber")
-    print(finishFlashNumber)
-
-    if(len(flashNumbersDoing) == finishFlashNumber):
-        ui.tabWidget.setTabEnabled(0,True)
-        for flashNumberDoing in flashNumbersDoing:
-            ui.pushButton_flashAll.setEnabled(True)
-            #listPushButton_Flash[flashNumberDoing].setEnabled(True)
-            finishFlashNumber = 0
 
 
 if __name__ == "__main__":
@@ -213,12 +228,13 @@ if __name__ == "__main__":
     Form_All = QtWidgets.QWidget()
     ui = Ui_Form_All()
     ui.setupUi(Form_All)
-    # listing de ensemble a modifier
+    # listing de ensemble a modifier en valeur global
     listingFramesFlash= [ui.frame_1,ui.frame_2,ui.frame_3,ui.frame_4]
     listWidgetFlashCarte = [ui.listWidget_flash_carte_1,ui.listWidget_flash_carte_22,ui.listWidget_flash_carte_33,ui.listWidget_flash_carte_44]
     listWidgetsCom = [ui.listWidget_com_1,ui.listWidget_com_2,ui.listWidget_com_3,ui.listWidget_com_4]
     listPushButton_Flash = [ui.pushButton_Flash_1,ui.pushButton_Flash_22,ui.pushButton_Flash_33,ui.pushButton_Flash_44]
     listLabelsFinish =[ui.label_finish_1, ui.label_finish_22, ui.label_finish_33, ui.label_finish_44]
+    listFlashInProcess=[False,False,False,False]
 
     #initialistion des message erreurs dnas config
     ui.label_error.setText('')
